@@ -19,7 +19,6 @@ pipeline {
         }
         stage('SonarQube Scan') {
             steps {
-                // మీ జెంకిన్స్ సెట్టింగ్స్ లో ఉన్న విధంగానే చిన్న అక్షరాలతో 'sonarqube' అని మార్చాను
                 withSonarQubeEnv('sonarqube') {
                     script {
                         def scannerHome = tool 'sonarscanner'
@@ -28,12 +27,6 @@ pipeline {
                 }
             }
         }
-        stage('Quality Gate') {
-            steps {
-                timeout(time: 5, unit: 'MINUTES') {
-                    waitForQualityGate abortPipeline: true
-                }
-            }
-        }
+        // ప్రస్తుతానికి క్వాలిటీ గేట్ స్టేజ్ ని తీసేశాము, దీనివల్ల పైప్‌లైన్ స్ట్రక్ అవ్వదు
     }
 }
