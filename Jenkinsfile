@@ -19,10 +19,12 @@ pipeline {
         }
         stage('SonarQube Scan') {
             steps {
-                // ఇక్కడ మీ స్క్రీన్ షాట్ లో ఉన్న పేరు 'sonarscanner' కరెక్ట్ గా మ్యాచ్ చేసాను
                 withSonarQubeEnv('SonarQube') {
-                    def scannerHome = tool 'sonarscanner'
-                    sh "${scannerHome}/bin/sonar-scanner"
+                    // డిక్లరేటివ్ పైప్‌లైన్‌లో వేరియబుల్స్ వాడటానికి script బ్లాక్ ఉపయోగించాలి
+                    script {
+                        def scannerHome = tool 'sonarscanner'
+                        sh "${scannerHome}/bin/sonar-scanner"
+                    }
                 }
             }
         }
