@@ -1,10 +1,5 @@
 pipeline {
     agent any
-    
-    tools {
-        // Step 13 లో మీరు ఇచ్చిన SonarScanner పేరు ఇక్కడ మ్యాచ్ అవ్వాలి
-        sonarScanner 'SonarScanner' 
-    }
 
     stages {
         stage('Clone') {
@@ -22,12 +17,12 @@ pipeline {
                 echo 'Testing Project...'
             }
         }
-        // --- ఇక్కడి నుండి కొత్త స్టేజీలు ---
         stage('SonarQube Scan') {
             steps {
-                // Step 12 లో మీరు ఇచ్చిన SonarQube సర్వర్ పేరు 'SonarQube' అవ్వాలి
+                // ఇక్కడ మీ స్క్రీన్ షాట్ లో ఉన్న పేరు 'sonarscanner' కరెక్ట్ గా మ్యాచ్ చేసాను
                 withSonarQubeEnv('SonarQube') {
-                    sh 'sonar-scanner'
+                    def scannerHome = tool 'sonarscanner'
+                    sh "${scannerHome}/bin/sonar-scanner"
                 }
             }
         }
