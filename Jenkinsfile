@@ -19,8 +19,8 @@ pipeline {
         }
         stage('SonarQube Scan') {
             steps {
-                withSonarQubeEnv('SonarQube') {
-                    // డిక్లరేటివ్ పైప్‌లైన్‌లో వేరియబుల్స్ వాడటానికి script బ్లాక్ ఉపయోగించాలి
+                // మీ జెంకిన్స్ సెట్టింగ్స్ లో ఉన్న విధంగానే చిన్న అక్షరాలతో 'sonarqube' అని మార్చాను
+                withSonarQubeEnv('sonarqube') {
                     script {
                         def scannerHome = tool 'sonarscanner'
                         sh "${scannerHome}/bin/sonar-scanner"
